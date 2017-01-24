@@ -1,0 +1,117 @@
+{
+    "plugins": [
+        "react",
+        "import"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "globals": {
+        "AMap": true,
+        "React": true,
+        "ReactDOM": true,
+        "console": true,
+        "$$": true,
+        "API": true,
+        "PAY_API": true,
+        "__MOCK__": true,
+        "__PROD__": true,
+        "__CLIENT_ID__": true,
+        "__CLIENT_SECRET__": true
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true 
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        }        
+    }, 
+    "rules": {
+        "camelcase": [2, {"properties": "never"}],
+        "eqeqeq": 2,
+        "no-var": 2,
+        "semi": [2, "always"],
+        "semi-spacing": [2,
+            {
+                "before": false,
+                "after": true
+            }
+        ],
+        "key-spacing": [2,
+            {
+                "beforeColon": false,
+                "afterColon": true
+            }
+        ],
+        "indent": [2, 4, { "SwitchCase": 1 }],
+        "quotes": [2, "single"],
+        "jsx-quotes": ["error", "prefer-double"],        
+        "quote-props": [2, "as-needed"],
+        "max-len": [2, 120],
+        "curly": [2, "multi-line"],
+        "no-console": 0,
+        "comma-spacing": [2, { "before": false, "after": true }],
+        "object-curly-spacing": [2, "always"],
+        "comma-style": 2,
+        "comma-dangle": 0,
+        "no-use-before-define": 2,
+        "no-underscore-dangle": 0,
+        "no-debugger": 0,
+        "dot-notation": 2,
+        "no-multi-spaces": 2,
+        "no-param-reassign": 0,
+        "import/no-extraneous-dependencies": 0,
+        "import/no-unresolved": 0,
+        "react/jsx-handler-names": [2,
+            {
+                "eventHandlerPrefix": "handle",
+                "eventHandlerPropPrefix": "on"
+            }
+        ],
+        "react/jsx-max-props-per-line": [2, {"maximum": 3}],
+        "react/jsx-indent-props": [2, 4],
+        "react/jsx-indent": [2, 4],
+        "react/jsx-no-bind": [2, {"ignoreRefs": true, "allowArrowFunctions": true}],
+        "react/prefer-stateless-function": [0, { 
+            "ignorePureComponents": true
+        }],
+        "react/jsx-no-duplicate-props": 2,
+        "react/jsx-sort-props": 0,
+        "react/jsx-space-before-closing": [2, "always"],
+        "react/jsx-closing-bracket-location": 2,
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
+        "react/prefer-es6-class": 2,
+        "react/jsx-pascal-case": 2,
+        "react/self-closing-comp": 2,
+        "react/jsx-boolean-value": 2,
+        "react/require-render-return": 2,
+        "react/jsx-curly-spacing": [2, "never"]
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [
+                    ".js",
+                    ".json"
+                ]
+            }
+        },
+        "import/extensions": [
+            "node_modules"
+        ],
+        "import/core-modules": [],
+        "import/ignore": [
+            "node_modules",
+            "\\.(coffee|scss|css|less|hbs|svg|json)$"
+        ]
+    }
+}

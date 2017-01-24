@@ -1,0 +1,10 @@
+./build
+./dist
+./eslint
+./src/libs/*
+./node_modules
+./eslint
+server.js
+webpack.config.js
+typings/*
+server.js
