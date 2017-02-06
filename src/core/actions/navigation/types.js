@@ -1,2 +1,0 @@
-// 更新导航器
-export const REPLACE_NAVIGATION = 'REPLACE_NAVIGATION';

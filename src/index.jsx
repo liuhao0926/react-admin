@@ -1,6 +1,6 @@
 import './styles';
 import './utils/public-utils';
-import Root from './containers/Root';
+import Root from './core/containers/Root';
 
 const rootElement = document.getElementById('app-root');
 ReactDOM.render(<Root />, rootElement);

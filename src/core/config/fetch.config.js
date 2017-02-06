@@ -1,8 +1,8 @@
 // require('es6-promise').polyfill();
 // Uses Emscripten stategy for determining environment
-import * as types from 'actions/userAccount/types';
-import { browserHistory } from 'react-router';
-import Auth from 'utils/auth';
+// import * as types from 'actions/userAccount/types';
+// import { browserHistory } from 'react-router';
+// import Auth from 'utils/auth';
 let interceptors = [];
 function interceptor(fetch, ...args) {
     const reversedInterceptors = interceptors.reduce((array, interceptor) => [interceptor].concat(array), []);
@@ -51,44 +51,44 @@ const fetchIntercept = {
         interceptors = [];
     }
 };
-function handleErrorData(response, json) {
-    const errorInfos = {
-        status: response.status,
-        statusText: response.statusText,
-        data: []
-    };
-    if (response.status >= 500) {
-        errorInfos.data[0] = `${response.status} ${response.statusText}`;
-    } else {
-        if ($$.isArray(json)) {
-            json.forEach(err => {
-                errorInfos.data.push(err.error_description);
-            });
-        } else if ($$.isObject(json)) {
-            errorInfos.data.push(...Object.values(json));
-        }
-    }
-    return errorInfos;
-}
-function handleResponseOk(response, resolve) {
-    return response.json()
-        .then(json => resolve(json))
-        .catch(() => {
-            console.info('Response Not an json object');
-            resolve(response);
-        }); 
-}
-function handleResponseError(response, reject) {
-    return response.json()
-        .then(json => {
-            reject(handleErrorData(response, json));
-        })
-        .catch(() => {
-            console.info('Response Not an json object');
-            reject(handleErrorData(response));
-        });     
-}
-export default function (dispatch) {
+// function handleErrorData(response, json) {
+//     const errorInfos = {
+//         status: response.status,
+//         statusText: response.statusText,
+//         data: []
+//     };
+//     if (response.status >= 500) {
+//         errorInfos.data[0] = `${response.status} ${response.statusText}`;
+//     } else {
+//         if ($$.isArray(json)) {
+//             json.forEach(err => {
+//                 errorInfos.data.push(err.error_description);
+//             });
+//         } else if ($$.isObject(json)) {
+//             errorInfos.data.push(...Object.values(json));
+//         }
+//     }
+//     return errorInfos;
+// }
+// function handleResponseOk(response, resolve) {
+//     return response.json()
+//         .then(json => resolve(json))
+//         .catch(() => {
+//             console.info('Response Not an json object');
+//             resolve(response);
+//         }); 
+// }
+// function handleResponseError(response, reject) {
+//     return response.json()
+//         .then(json => {
+//             reject(handleErrorData(response, json));
+//         })
+//         .catch(() => {
+//             console.info('Response Not an json object');
+//             reject(handleErrorData(response));
+//         });     
+// }
+export default function (dispatch) { // eslint-disable-line
     return fetchIntercept.register({
         request(url, config = {}, dispatchType) {
             const baseConfig = {
@@ -101,10 +101,10 @@ export default function (dispatch) {
                 }
             };
             config = Object.assign({}, baseConfig, config);
-            if (Auth.loggedIn() && url.indexOf('amap.com') === -1) {
-                const { Token } = Auth.getToken();
-                config.headers.Authorization = `Bearer ${Token}`; 
-            }
+            // if (Auth.loggedIn() && url.indexOf('amap.com') === -1) {
+            //     const { Token } = Auth.getToken();
+            //     config.headers.Authorization = `Bearer ${Token}`; 
+            // }
             if (!/^\/\/[^ "]+$/.test(url)) {
                 url = `${API + url}`;
             }
@@ -116,48 +116,48 @@ export default function (dispatch) {
             return Promise.reject(error);
         },
 
-        response(response, requestArgs) {
-            return new Promise((resolve, reject) => {
-                const status = response.status;
-                switch (true) {
-                    case (status >= 200 && status < 300):
-                        // response.ok
-                        return handleResponseOk(response, resolve, reject);
-                    case (status === 401):
-                        dispatch({
-                            type: `${types.REFRESH_TOKEN}_START`
-                        });
-                        return Auth.refreshToken()
-                            .then(user => {
-                                dispatch({
-                                    type: `${types.REFRESH_TOKEN}_SUCCESS`,
-                                    userData: user
-                                });
-                                const [uri, options, dispatchType] = requestArgs;
-                                if ($$.isDefined(dispatchType)) {
-                                    return dispatch({
-                                        type: dispatchType,
-                                        fetchConfig: { uri, options }
-                                    });
-                                } else {
-                                    return fetch(uri, options)
-                                        .then(res => handleResponseOk(res, resolve, reject))
-                                        .catch(err => handleResponseError(err, reject));
-                                }
-                            })
-                            .catch(error => {
-                                console.info(error);
-                                dispatch({
-                                    type: `${types.REFRESH_TOKEN}_FAILURE`,
-                                    data: error
-                                });
-                                return browserHistory.push({ pathname: '/login' });
-                            });
+        response(response, requestArgs) { // eslint-disable-line
+            // return new Promise((resolve, reject) => {
+            //     const status = response.status;
+            //     switch (true) {
+            //         case (status >= 200 && status < 300):
+            //             // response.ok
+            //             return handleResponseOk(response, resolve, reject);
+            //         case (status === 401):
+            //             dispatch({
+            //                 type: `${types.REFRESH_TOKEN}_START`
+            //             });
+            //             return Auth.refreshToken()
+            //                 .then(user => {
+            //                     dispatch({
+            //                         type: `${types.REFRESH_TOKEN}_SUCCESS`,
+            //                         userData: user
+            //                     });
+            //                     const [uri, options, dispatchType] = requestArgs;
+            //                     if ($$.isDefined(dispatchType)) {
+            //                         return dispatch({
+            //                             type: dispatchType,
+            //                             fetchConfig: { uri, options }
+            //                         });
+            //                     } else {
+            //                         return fetch(uri, options)
+            //                             .then(res => handleResponseOk(res, resolve, reject))
+            //                             .catch(err => handleResponseError(err, reject));
+            //                     }
+            //                 })
+            //                 .catch(error => {
+            //                     console.info(error);
+            //                     dispatch({
+            //                         type: `${types.REFRESH_TOKEN}_FAILURE`,
+            //                         data: error
+            //                     });
+            //                     return browserHistory.push({ pathname: '/login' });
+            //                 });
 
-                }
-                return handleResponseError(response, reject);
+            //     }
+            //     return handleResponseError(response, reject);
                 
-            });
+            // });
         },
 
         responseError(error) {

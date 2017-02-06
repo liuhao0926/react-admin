@@ -28,8 +28,8 @@ const deps = [
 ];
 const webpackPluginCommonConfig = [
     new webpack.DefinePlugin({
-        // __PROD__: isProduct, 
-        // __MOCK__: isMock,
+        __PROD__: isProduct, 
+        __MOCK__: isMock,
         // __CLIENT_ID__: CLIENT_ID,
         // __CLIENT_SECRET__: CLIENT_SECRET,
         API: API_HOST
@@ -112,7 +112,7 @@ const configure = {
             store: path.join(__dirname, 'src/core/store'),
             utils: path.join(__dirname, 'src/utils'),
             UI: 'antd',
-            'ui.less': path.join(__dirname, 'src/styles/ui')
+            'ui.less': path.join(__dirname, 'src/styles')
         }        
     },
     cache: true,
