@@ -15,21 +15,25 @@ class App extends Component {
             minContentHeight: 280
         };
         this.handleToggle = this.handleToggle.bind(this);
-        this.handleWindowResize();
     }
     handleToggle() {
         this.setState({
             collapsed: !this.state.collapsed
         });
     }
+    componentDidMount() {
+        this.resizeWindow();
+        this.handleWindowResize();
+    }
     handleWindowResize() {
-        window.onresize = () => {
-            const clientHeight = document.documentElement.clientHeight;
-            const contentHeight = clientHeight - 64 - 48;
-            this.setState({
-                minContentHeight: contentHeight
-            });
-        };
+        window.onresize = this.resizeWindow.bind(this);
+    }
+    resizeWindow() {
+        const clientHeight = document.documentElement.clientHeight;
+        const contentHeight = clientHeight - 64 - 48;
+        this.setState({
+            minContentHeight: contentHeight
+        });
     }
     render() {
         return (
