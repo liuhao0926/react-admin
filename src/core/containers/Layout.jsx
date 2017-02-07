@@ -11,13 +11,25 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            collapsed: false
+            collapsed: false,
+            minContentHeight: 280
         };
+        this.handleToggle = this.handleToggle.bind(this);
+        this.handleWindowResize();
     }
     handleToggle() {
         this.setState({
             collapsed: !this.state.collapsed
         });
+    }
+    handleWindowResize() {
+        window.onresize = () => {
+            const clientHeight = document.documentElement.clientHeight;
+            const contentHeight = clientHeight - 64 - 48;
+            this.setState({
+                minContentHeight: contentHeight
+            });
+        };
     }
     render() {
         return (
@@ -51,7 +63,14 @@ class App extends Component {
                             onClick={this.handleToggle}
                         />
                     </Header>
-                    <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+                    <Content style=
+                        {{
+                            margin: '24px 16px',
+                            padding: 24,
+                            background: '#fff',
+                            minHeight: this.state.minContentHeight
+                        }}
+                    >
                         Content
                     </Content>
                 </Layout>

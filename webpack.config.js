@@ -112,7 +112,7 @@ const configure = {
             store: path.join(__dirname, 'src/core/store'),
             utils: path.join(__dirname, 'src/utils'),
             UI: 'antd',
-            'ui.less': path.join(__dirname, 'src/styles')
+            'ui.less': path.join(__dirname, 'src/styles/index.css')
         }        
     },
     cache: true,
