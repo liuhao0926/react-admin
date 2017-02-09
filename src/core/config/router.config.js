@@ -1,9 +1,13 @@
 import Layout from '../containers/Layout';
+import Wrapper from '../containers/Wrapper';
 
 const childRoutes = [];
+const childRoutesAccess = [];
+const childRoutesNoAccess = [];
 const routeConfig = [];
 const rawRouters = [
-    'home'
+    'home',
+    'login'
 ];
 
 function handlerRouter(route) {
@@ -29,15 +33,24 @@ childRoutes.forEach(route => {
                 );
             });
         }
+        if (route.config.requireAuth) {
+            childRoutesAccess.push(route);
+        } else {
+            childRoutesNoAccess.push(route);
+        }
 
     }
 });
 const routes = {
     component: Layout,
-    childRoutes
+    childRoutes: childRoutesAccess
+};
+const routesNoAccess = {
+    component: Wrapper,
+    childRoutes: childRoutesNoAccess
 };
 
-export { routes, routeConfig };
+export { routes, routesNoAccess, routeConfig };
 
 
 

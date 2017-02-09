@@ -2,7 +2,8 @@ module.exports = {
     path: '/',
     config: {
         title: '首页',
-        navbarState: 'home'
+        navbarState: 'home',
+        requireAuth: true
     },    
     getIndexRoute(location, callback) {
         require.ensure([], (require) => {

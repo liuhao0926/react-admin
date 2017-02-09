@@ -75,7 +75,7 @@ class App extends Component {
                             minHeight: this.state.minContentHeight
                         }}
                     >
-                        Content
+                        {this.props.children}
                     </Content>
                 </Layout>
             </Layout>

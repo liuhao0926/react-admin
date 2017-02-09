@@ -1,7 +1,7 @@
 import fetchIntercepter from '../config/fetch.config';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
-import { routes } from '../config/router.config';
+import { routes, routesNoAccess } from '../config/router.config';
 // import * as action from 'actions';
 import createStore from '../store';
 
@@ -54,6 +54,7 @@ export default function Root() {
         <Provider store={store}>
             <Router history={browserHistory}>
                 {routes}
+                {routesNoAccess}
             </Router>
         </Provider>
     );
