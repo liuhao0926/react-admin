@@ -1,7 +1,8 @@
-// import './home.less';
+import './login.less';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-// import { WingBlank, WhiteSpace, Grid, Icon, Modal } from 'UI';
+import { Form, Icon, Input, Button, Checkbox } from 'UI';
+const FormItem = Form.Item;
 // import { bindActionCreators } from 'redux';
 // import { fetchBusinessMode } from 'actions';
 
@@ -26,7 +27,22 @@ class LoginPage extends Component {
     render() {
         return (
             <div>
-                这是登陆页面
+                <Form onSubmit={this.handleSubmit} className="login-form">
+                    <FormItem>
+                        <Input addonBefore={<Icon type="user" />} placeholder="Username" />
+                    </FormItem>
+                    <FormItem>
+                        <Input addonBefore={<Icon type="lock" />} type="password" placeholder="Password" />
+                    </FormItem>
+                    <FormItem>
+                        <Checkbox>Remember me</Checkbox>
+                        <a className="login-form-forgot">Forgot password</a>
+                        <Button type="primary" htmlType="submit" className="login-form-button">
+                            Log in
+                        </Button>
+                        Or <a>register now!</a>
+                    </FormItem>
+                </Form>
             </div>
         );
     }

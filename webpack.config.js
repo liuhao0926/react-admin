@@ -173,12 +173,12 @@ const configure = {
     },    
     postcss() {
         return [
-            autoprefixer,
-            pxtorem({
-                rootValue: 100,
-                propWhiteList: [],
-                selectorBlackList: [/^html$/, /^\.ant-/, /^\.github-/, /^\.gh-/]
-            })
+            autoprefixer
+            // pxtorem({
+            //     rootValue: 100,
+            //     propWhiteList: [],
+            //     selectorBlackList: [/^html$/, /^\.ant-/, /^\.github-/, /^\.gh-/]
+            // })
         ];
     }    
 };
