@@ -24,23 +24,26 @@ class LoginPage extends Component {
     
     shouldComponentUpdate() {
     }
+    handleSubmit() {
+        console.log('submit');
+    }
     render() {
         return (
             <div>
                 <Form onSubmit={this.handleSubmit} className="login-form">
                     <FormItem>
-                        <Input addonBefore={<Icon type="user" />} placeholder="Username" />
+                        <Input addonBefore={<Icon type="user" />} placeholder="用户名" />
                     </FormItem>
                     <FormItem>
-                        <Input addonBefore={<Icon type="lock" />} type="password" placeholder="Password" />
+                        <Input addonBefore={<Icon type="lock" />} type="password" placeholder="密码" />
                     </FormItem>
                     <FormItem>
-                        <Checkbox>Remember me</Checkbox>
-                        <a className="login-form-forgot">Forgot password</a>
+                        <Checkbox>记住账号</Checkbox>
+                        <a className="login-form-forgot">忘记密码？</a>
                         <Button type="primary" htmlType="submit" className="login-form-button">
-                            Log in
+                            登录
                         </Button>
-                        Or <a>register now!</a>
+                        或者 <a>现在注册!</a>
                     </FormItem>
                 </Form>
             </div>
