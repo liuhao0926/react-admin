@@ -1,4 +1,4 @@
-// import { userLogin, userLogout } from './userAccount';
+import { userLogin, userLogout } from './userAccount';
 import { fetchCityList, selectedCity, fetchBusinessMode } from './citys';
 // import { replaceNavigation } from './navigation';
 // import { fetchStationConfig } from './stations';
@@ -8,8 +8,8 @@ import { fetchCityList, selectedCity, fetchBusinessMode } from './citys';
 
 export {
     // userAccount
-    // userLogin,
-    // userLogout,
+    userLogin,
+    userLogout,
     // citys
     fetchCityList,
     selectedCity,

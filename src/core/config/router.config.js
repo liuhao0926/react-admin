@@ -43,7 +43,10 @@ childRoutes.forEach(route => {
 });
 const routes = {
     component: Layout,
-    childRoutes: childRoutesAccess
+    childRoutes: childRoutesAccess,
+    config: {
+        requireAuth: true
+    }
 };
 const routesNoAccess = {
     component: Wrapper,

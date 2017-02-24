@@ -12,7 +12,7 @@ export default (state = {
             return Object.assign({}, state, { loggedIn: false, profile: {} });  
 
         case `${types.REFRESH_TOKEN}_START`:
-            return Object.assign({}, state);  
+            return Object.assign({}, state);
         
         case `${types.REFRESH_TOKEN}_SUCCESS`:
             console.info('刷新TOKEN成功');
@@ -22,7 +22,7 @@ export default (state = {
             });
             
         case `${types.REFRESH_TOKEN}_FAILURE`:
-            return Object.assign({}, state, { loggedIn: false, profile: {} });  
+            return Object.assign({}, state, { loggedIn: false, profile: {} });
             
         default:
             return state;

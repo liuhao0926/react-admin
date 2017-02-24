@@ -3,8 +3,8 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Icon, Input, Button, Checkbox } from 'UI';
 const FormItem = Form.Item;
-// import { bindActionCreators } from 'redux';
-// import { fetchBusinessMode } from 'actions';
+import { bindActionCreators } from 'redux';
+import { userLogin } from 'actions';
 
 // import { BUSINESS_MODES } from 'config/business.config';
 // import CarouselBox from 'components/CarouselBox';
@@ -18,6 +18,10 @@ class LoginPage extends Component {
         // this.handleSelectMode = this.handleSelectMode.bind(this);
     }
     componentDidMount() {
+        this.setState({
+            userData: {
+            }
+        });
     }
     componentWillReceiveProps() {
     }
@@ -25,7 +29,7 @@ class LoginPage extends Component {
     shouldComponentUpdate() {
     }
     handleSubmit() {
-        console.log('submit');
+        // console.log('submit');
     }
     render() {
         return (
@@ -51,7 +55,7 @@ class LoginPage extends Component {
     }
 }
 
-// const mapStateToProps = state => ({ cityStore: state.cityStore, userAccount: state.userAccount });
-// const actions = { fetchBusinessMode };
-// const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
-module.exports = connect()(LoginPage);
+const mapStateToProps = state => ({ userAccount: state.userAccount });
+const actions = { userLogin };
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+module.exports = connect(mapStateToProps, mapDispatchToProps)(LoginPage);
