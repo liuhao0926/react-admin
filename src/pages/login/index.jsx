@@ -1,7 +1,7 @@
 import './login.less';
 import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Checkbox } from 'UI';
+import { Form, Icon, Input, Button, Checkbox, Alert } from 'UI';
 const FormItem = Form.Item;
 import { bindActionCreators } from 'redux';
 import { userLogin } from 'actions';
@@ -35,7 +35,8 @@ class LoginPage extends Component {
                 validRule: /^.{6,}$/,
                 value: '',
                 name: 'userPass'
-            }
+            },
+            validForm: true
         };
         this.handleUserNameChange = this.handleUserNameChange.bind(this);
         this.handleUserPassChange = this.handleUserPassChange.bind(this);
@@ -58,10 +59,14 @@ class LoginPage extends Component {
         data.userName = this.state.userName.value;
         data.userPass = this.state.userPass.value;
         if (!data.userName || !data.userPass) {
-            alert('请输入完整信息');
+            this.setState({
+                validForm: false
+            });
             return;
         }
         this.props.userLogin(data);
+        this.props.router.push('/');
+        // console.log(this.props.router);
     }
     handleUserNameChange(e) {
         const origin = Object.assign({}, this.state.userName);
@@ -105,6 +110,12 @@ class LoginPage extends Component {
         return (
             <div>
                 <Form className="login-form">
+                    <Alert
+                        message="请输入完整信息"
+                        type="error"
+                        showIcon
+                        style={{ display: this.state.validForm ? 'none' : '' }}
+                    />
                     <FormItem
                         validateStatus={this.state.userName.validateStatus}
                         help={this.state.userName.help}

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import cityStore from './citys';
-// import userAccount from './userAccount';
+import userAccount from './userAccount';
 // import navigationState from './navigation';
 // import stationStore from './stations';
 // import contactStore from './contact';
@@ -8,8 +8,8 @@ import cityStore from './citys';
 // import { newOrderStore, orderDetails, priceDetails } from './order';
 
 export default combineReducers({
-    cityStore
-    // userAccount
+    cityStore,
+    userAccount
     // navigationState,
     // stationStore,
     // contactStore,
