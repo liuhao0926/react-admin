@@ -23,7 +23,14 @@ class StorageService {
         }
     }
     remove(key) {
-        this.storage.removeItem(this.prefix + key);
+        key = this.prefix + key;
+        const exp = new Date();
+        exp.setTime(exp.getTime() - 1);
+        const cval = this.get(key);
+        if(cval !== null) {
+            // this.storage.cookie = key + "=" + cval + ";expires=" + exp.toGMTString();
+            this.storage.cookie = `${key}=${cval};expires=${exp.toGMTString()}`;
+        }
     }
 }
 export default new StorageService();

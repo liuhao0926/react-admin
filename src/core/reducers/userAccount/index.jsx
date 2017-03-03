@@ -2,7 +2,7 @@ import * as types from 'actions/userAccount/types';
 import session from 'utils/storage';
 // import Auth from 'utils/auth';
 const data = session.get('userData') || {};
-console.log(data);
+// console.log(data);
 export default (state = data, action) => {
     switch (action.type) {
         case types.USER_LOGIN:
@@ -11,6 +11,7 @@ export default (state = data, action) => {
             return Object.assign({}, state, { loggedIn: true, profile: action.userData });
             
         case types.USER_LOGOUT:
+            session.remove('userData');
             return Object.assign({}, state, { loggedIn: false, profile: {} });
 
         case `${types.REFRESH_TOKEN}_START`:

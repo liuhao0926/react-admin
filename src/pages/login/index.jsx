@@ -14,7 +14,7 @@ import { userLogin } from 'actions';
 class LoginPage extends Component {
     static propTypes = {
         userLogin: PropTypes.func.isRequired,
-        // userAccount: PropTypes.object.isRequired,
+        userAccount: PropTypes.object.isRequired,
         router: PropTypes.object.isRequired
     };
     constructor() {
@@ -43,10 +43,9 @@ class LoginPage extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        // this.setState({
-        //     userData: {
-        //     }
-        // });
+        if (this.props.userAccount.loggedIn) {
+            this.props.router.push('/');
+        }
     }
     componentWillReceiveProps() {
     }

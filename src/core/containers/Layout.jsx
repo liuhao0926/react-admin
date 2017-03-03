@@ -1,12 +1,16 @@
 import { Component, PropTypes } from 'react';
-import { Layout, Menu, Icon } from 'UI';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Layout, Menu, Icon, Button } from 'UI';
+import { userLogout } from 'actions';
 
 const { Header, Sider, Content } = Layout;
 class App extends Component {
     static propTypes = {
         children: PropTypes.element.isRequired,
         location: PropTypes.object.isRequired,
-        router: PropTypes.object.isRequired
+        router: PropTypes.object.isRequired,
+        userLogout: PropTypes.func.isRequired
     }
     constructor() {
         super();
@@ -15,6 +19,7 @@ class App extends Component {
             minContentHeight: 280
         };
         this.handleToggle = this.handleToggle.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
     handleToggle() {
         this.setState({
@@ -34,6 +39,12 @@ class App extends Component {
         this.setState({
             minContentHeight: contentHeight
         });
+    }
+    handleLogout() {
+        if (window.confirm('确认要退出吗？')) {
+            this.props.userLogout();
+            this.props.router.push('/login');
+        }
     }
     render() {
         return (
@@ -66,6 +77,15 @@ class App extends Component {
                             type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                             onClick={this.handleToggle}
                         />
+                        <div style={{
+                            float: 'right',
+                            marginRight: '20px'
+                        }}
+                        >
+                            <Button type="primary" icon="download" onClick={this.handleLogout}>
+                                退出
+                            </Button>                          
+                        </div>
                     </Header>
                     <Content style=
                         {{
@@ -82,4 +102,7 @@ class App extends Component {
         );
     }
 }
-export default App;
+// const mapStateToProps = state => ({ userAccount: state.userAccount });
+const actions = { userLogout };
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+export default connect(() => ({}), mapDispatchToProps)(App);
