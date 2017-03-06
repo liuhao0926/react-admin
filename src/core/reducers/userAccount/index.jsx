@@ -2,7 +2,7 @@ import * as types from 'actions/userAccount/types';
 import session from 'utils/storage';
 // import Auth from 'utils/auth';
 const data = session.get('userData') || {};
-// console.log(data);
+// console.log('data', data);
 export default (state = data, action) => {
     switch (action.type) {
         case types.USER_LOGIN:

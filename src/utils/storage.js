@@ -8,7 +8,7 @@ class StorageService {
     }
     set(key, value) {
         const cacheObject = JSON.stringify(value);
-        this.storage.cookie = this.prefix + key + '=' + escape (cacheObject) + ';';
+        this.storage.cookie = this.prefix + key + '=' + escape(cacheObject) + ';';
         return cacheObject;
     }
     get(key) {
@@ -23,13 +23,13 @@ class StorageService {
         }
     }
     remove(key) {
-        key = this.prefix + key;
+        // key = this.prefix + key;
         const exp = new Date();
         exp.setTime(exp.getTime() - 1);
         const cval = this.get(key);
         if(cval !== null) {
             // this.storage.cookie = key + "=" + cval + ";expires=" + exp.toGMTString();
-            this.storage.cookie = `${key}=${cval};expires=${exp.toGMTString()}`;
+            this.storage.cookie = `${this.prefix + key}=${cval};expires=${exp.toGMTString()}`;
         }
     }
 }
