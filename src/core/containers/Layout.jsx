@@ -2,6 +2,7 @@ import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Layout, Menu, Icon, Button } from 'UI';
+import Breadcrumb from '../_components/Breadcrumb';
 import { userLogout } from 'actions';
 
 const { Header, Sider, Content } = Layout;
@@ -35,7 +36,7 @@ class App extends Component {
     }
     resizeWindow() {
         const clientHeight = document.documentElement.clientHeight;
-        const contentHeight = clientHeight - 64 - 48;
+        const contentHeight = clientHeight - 64 - 42 - 24;
         this.setState({
             minContentHeight: contentHeight
         });
@@ -68,6 +69,14 @@ class App extends Component {
                             <Icon type="upload" />
                             <span className="nav-text">nav 3</span>
                         </Menu.Item>
+                        <Menu.SubMenu
+                            key="sub1"
+                            title={<span><Icon type="user" /><span className="nav-text">User</span></span>}
+                        >
+                            <Menu.Item key="4">Tom</Menu.Item>
+                            <Menu.Item key="5">Bill</Menu.Item>
+                            <Menu.Item key="6">Alex</Menu.Item>
+                        </Menu.SubMenu>
                     </Menu>
                 </Sider>
                 <Layout>
@@ -87,9 +96,10 @@ class App extends Component {
                             </Button>                          
                         </div>
                     </Header>
+                    <Breadcrumb />
                     <Content style=
                         {{
-                            margin: '24px 16px',
+                            margin: '0px 16px 24px 16px',
                             padding: 24,
                             background: '#fff',
                             minHeight: this.state.minContentHeight

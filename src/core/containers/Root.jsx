@@ -10,13 +10,13 @@ const store = createStore();
 fetchIntercepter(store.dispatch);
 
 const onEnter = (nextState, replace) => {
-    console.log('go in onEnter');
+    // console.log('go in onEnter');
     const state = store.getState();
     const loggedIn = state.userAccount && state.userAccount.loggedIn;
-    console.log('loggedIn', loggedIn);
-    console.log('state', state);
+    // console.log('loggedIn', loggedIn);
+    // console.log('state', state);
     if (nextState) {
-        // console.log('array length:', nextState.routes.length);
+        console.log('array length:', nextState.routes);
         if (nextState.routes) {
             nextState.routes.forEach((item) => {
                 if ($$.isObject(item)
