@@ -1,5 +1,4 @@
-import './home.less';
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { WingBlank, WhiteSpace, Grid, Icon, Modal } from 'UI';
 // import { bindActionCreators } from 'redux';
@@ -10,7 +9,10 @@ import { connect } from 'react-redux';
 // import { StorageService } from '../../utils';
 
 
-class HomePage extends Component {
+class ProfilePage extends Component {
+    static propTypes = {
+        children: PropTypes.element
+    };
     constructor() {
         super();
         this.state = {};
@@ -26,7 +28,8 @@ class HomePage extends Component {
     render() {
         return (
             <div>
-                这是首页内容
+                这是用户档案页面
+                <div style={{ marginTop: 30 }}>{this.props.children}</div>
             </div>
         );
     }
@@ -35,4 +38,4 @@ class HomePage extends Component {
 // const mapStateToProps = state => ({ cityStore: state.cityStore, userAccount: state.userAccount });
 // const actions = { fetchBusinessMode };
 // const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
-module.exports = connect()(HomePage);
+module.exports = connect()(ProfilePage);

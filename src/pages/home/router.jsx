@@ -1,10 +1,12 @@
 module.exports = {
-    path: '/',
+    // path: '/',
     config: {
         title: '首页',
         navbarState: 'home',
         requireAuth: true
-    },    
+    },
+    name: 'Home',
+    breadcrumbName: '首页',
     getIndexRoute(location, callback) {
         require.ensure([], (require) => {
             callback(null, require('./index'));

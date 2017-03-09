@@ -7,7 +7,8 @@ const childRoutesNoAccess = [];
 const routeConfig = [];
 const rawRouters = [
     'home',
-    'login'
+    'login',
+    'profile'
 ];
 
 function handlerRouter(route) {
@@ -42,6 +43,7 @@ childRoutes.forEach(route => {
     }
 });
 const routes = {
+    path: '/',
     component: Layout,
     childRoutes: childRoutesAccess,
     config: {

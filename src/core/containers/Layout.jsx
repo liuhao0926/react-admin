@@ -1,8 +1,9 @@
 import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Layout, Menu, Icon, Button } from 'UI';
+import { Layout, Icon, Button } from 'UI';
 import Breadcrumb from '../_components/Breadcrumb';
+import SideMenu from '../_components/SideMenu';
 import { userLogout } from 'actions';
 
 const { Header, Sider, Content } = Layout;
@@ -56,28 +57,7 @@ class App extends Component {
                     collapsed={this.state.collapsed}
                 >
                     <div className="logo" />
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                        <Menu.Item key="1">
-                            <Icon type="user" />
-                            <span className="nav-text">nav 1</span>
-                        </Menu.Item>
-                        <Menu.Item key="2">
-                            <Icon type="video-camera" />
-                            <span className="nav-text">nav 2</span>
-                        </Menu.Item>
-                        <Menu.Item key="3">
-                            <Icon type="upload" />
-                            <span className="nav-text">nav 3</span>
-                        </Menu.Item>
-                        <Menu.SubMenu
-                            key="sub1"
-                            title={<span><Icon type="user" /><span className="nav-text">User</span></span>}
-                        >
-                            <Menu.Item key="4">Tom</Menu.Item>
-                            <Menu.Item key="5">Bill</Menu.Item>
-                            <Menu.Item key="6">Alex</Menu.Item>
-                        </Menu.SubMenu>
-                    </Menu>
+                    <SideMenu router={this.props.router} />
                 </Sider>
                 <Layout>
                     <Header style={{ background: '#fff', padding: 0 }}>
