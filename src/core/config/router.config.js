@@ -48,7 +48,9 @@ const routes = {
     childRoutes: childRoutesAccess,
     config: {
         requireAuth: true
-    }
+    },
+    name: 'Home',
+    breadcrumbName: '首页'
 };
 const routesNoAccess = {
     component: Wrapper,

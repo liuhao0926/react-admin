@@ -19,6 +19,7 @@ class App extends Component {
         this.state = {
             collapsed: false,
             minContentHeight: 280
+            // defaultSelectedKeys: []
         };
         this.handleToggle = this.handleToggle.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
@@ -31,6 +32,7 @@ class App extends Component {
     componentDidMount() {
         this.resizeWindow();
         this.handleWindowResize();
+        // console.log('this.props:', this.props.location);
     }
     handleWindowResize() {
         window.onresize = this.resizeWindow.bind(this);
@@ -57,7 +59,7 @@ class App extends Component {
                     collapsed={this.state.collapsed}
                 >
                     <div className="logo" />
-                    <SideMenu router={this.props.router} />
+                    <SideMenu router={this.props.router} defaultPathname={this.props.location.pathname} />
                 </Sider>
                 <Layout>
                     <Header style={{ background: '#fff', padding: 0 }}>
@@ -76,7 +78,7 @@ class App extends Component {
                             </Button>                          
                         </div>
                     </Header>
-                    <Breadcrumb />
+                    <Breadcrumb {...this.props} />
                     <Content style=
                         {{
                             margin: '0px 16px 24px 16px',

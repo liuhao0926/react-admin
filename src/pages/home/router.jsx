@@ -5,8 +5,8 @@ module.exports = {
         navbarState: 'home',
         requireAuth: true
     },
-    name: 'Home',
-    breadcrumbName: '首页',
+    // name: 'Home',
+    // breadcrumbName: '首页',
     getIndexRoute(location, callback) {
         require.ensure([], (require) => {
             callback(null, require('./index'));

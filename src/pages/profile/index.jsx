@@ -1,4 +1,5 @@
 import { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 // import { WingBlank, WhiteSpace, Grid, Icon, Modal } from 'UI';
 // import { bindActionCreators } from 'redux';
@@ -29,6 +30,7 @@ class ProfilePage extends Component {
         return (
             <div>
                 这是用户档案页面
+                <Link to="/user/add">点击我到档案添加</Link>                
                 <div style={{ marginTop: 30 }}>{this.props.children}</div>
             </div>
         );

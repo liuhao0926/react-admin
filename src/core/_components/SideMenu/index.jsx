@@ -1,9 +1,11 @@
 import { Component, PropTypes } from 'react';
 import { Menu, Icon } from 'UI';
+import menuData from './data';
 
 class SideMenu extends Component {
     static propTypes = {
-        router: PropTypes.object.isRequired
+        router: PropTypes.object.isRequired,
+        defaultPathname: PropTypes.string
     };
     constructor() {
         super();
@@ -14,20 +16,19 @@ class SideMenu extends Component {
     }
     componentDidMount() {
         this.__initRouteEvent();
-        // this.props.router.listenBefore((obj) => {
-        //     console.log('router listenBefore:', obj);
-        // });
+        this.__initDefaultMenuItem();
     }
     __initRouteEvent() {
         this.props.router.listen((obj) => {
             const pathname = obj.pathname;
-            // const keys = [...this.state.selectedKeys];
             const keys = [];
             let key;
             if (pathname === '/') {
                 key = 'home';
-            } else {
+            } else if(pathname.indexOf('/') === 0) {
                 key = pathname.substr(1);
+            } else {
+                key = pathname;
             }
             keys.push(key);
             this.setState({
@@ -35,23 +36,55 @@ class SideMenu extends Component {
             });
         });
     }
+    __initDefaultMenuItem() {
+        const keys = [];
+        let key = this.props.defaultPathname.substr(1) || 'home';
+        keys.push(key);
+        this.setState({
+            selectedKeys: keys
+        });
+    }
     handleOnClick(item) {
-        // console.log(item);
         let key = item.key;
         if (key === 'home') {
             key = '';
         }
         key = `/${key}`;
         this.props.router.push(key);
-        // console.log('this.props.router', this.props.router, this.props.router.getCurrentLocation());
     }
-    render() {
+    __renderMenuItems(data) {
+        let items = [];
+        data.forEach((obj) => {
+            if (!obj.children) {
+                items.push(this.__renderMenuItem(obj));
+                return;
+            }
+            items.push(
+                <Menu.SubMenu
+                    key={obj.key}
+                    title={<span><Icon type={obj.iconType} /><span className="nav-text">{obj.title}</span></span>}
+                >
+                    {this.__renderMenuItems(obj.children)}
+                </Menu.SubMenu>
+            );
+        });
+        return items;
+    }
+    __renderMenuItem(obj) {
+        if (obj.iconType) {
+            return (
+                <Menu.Item key={obj.key}>
+                    <Icon type={obj.iconType} />
+                    <span className="nav-text">{obj.title}</span>
+                </Menu.Item>
+            );
+        }
         return (
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}
-                onClick={this.handleOnClick}
-                selectedKeys={this.state.selectedKeys}
-            >
-                <Menu.Item key="home">
+            <Menu.Item key={obj.key}>{obj.title}</Menu.Item>
+        );
+    }
+    /**
+     *                 <Menu.Item key="home">
                     <Icon type="user" />
                     <span className="nav-text">首页</span>
                 </Menu.Item>
@@ -71,6 +104,14 @@ class SideMenu extends Component {
                     <Menu.Item key="5">Bill</Menu.Item>
                     <Menu.Item key="6">Alex</Menu.Item>
                 </Menu.SubMenu>
+     */
+    render() {
+        return (
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['home']}
+                onClick={this.handleOnClick}
+                selectedKeys={this.state.selectedKeys}
+            >
+                {this.__renderMenuItems(menuData)}
             </Menu>
         );
     }
