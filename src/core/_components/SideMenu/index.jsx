@@ -30,6 +30,9 @@ class SideMenu extends Component {
             } else {
                 key = pathname;
             }
+            if (key.length > 1) {
+                key = key.replace(/\/$/, '');
+            }
             keys.push(key);
             this.setState({
                 selectedKeys: keys
@@ -39,6 +42,9 @@ class SideMenu extends Component {
     __initDefaultMenuItem() {
         const keys = [];
         let key = this.props.defaultPathname.substr(1) || 'home';
+        if (key.length > 1) {
+            key = key.replace(/\/$/, '');
+        }
         keys.push(key);
         this.setState({
             selectedKeys: keys
