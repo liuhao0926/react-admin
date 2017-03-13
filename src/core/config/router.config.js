@@ -1,15 +1,11 @@
 import Layout from '../containers/Layout';
 import Wrapper from '../containers/Wrapper';
-
+// console.log('__PAGES__:', __PAGES__);
 const childRoutes = [];
 const childRoutesAccess = [];
 const childRoutesNoAccess = [];
 const routeConfig = [];
-const rawRouters = [
-    'home',
-    'login',
-    'profile'
-];
+const rawRouters = __PAGES__; // eslint-disable-line
 
 function handlerRouter(route) {
     childRoutes.push(require(`pages/${route}/router`));

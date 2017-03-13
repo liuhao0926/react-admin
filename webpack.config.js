@@ -4,6 +4,7 @@ const args = require('yargs').argv;
 const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
 const WriteFilePlugin = require('write-file-webpack-plugin');
+const fs = require('fs');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -26,13 +27,21 @@ const deps = [
     'whatwg-fetch/fetch.js',
     // 'babel-polyfill/browser.js',
 ];
+// 读取项目页面目录所有模块
+const pagesPath = path.resolve('src/pages');
+let PAGES = fs.readdirSync(pagesPath).filter((item) => {
+    return /^([a-zA-Z]|\d|\-|\_)+$/.test(item); // eslint-disable-line no-useless-escape
+});
+PAGES = JSON.stringify(PAGES);
+
 const webpackPluginCommonConfig = [
     new webpack.DefinePlugin({
         __PROD__: isProduct, 
         __MOCK__: isMock,
         // __CLIENT_ID__: CLIENT_ID,
         // __CLIENT_SECRET__: CLIENT_SECRET,
-        API: API_HOST
+        API: API_HOST,
+        __PAGES__: PAGES
         // PAY_API: PAY_API_HOST
     }),
     new webpack.optimize.CommonsChunkPlugin({

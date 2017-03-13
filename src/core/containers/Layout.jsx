@@ -1,7 +1,7 @@
 import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Layout, Icon, Button } from 'UI';
+import { Layout, Icon, Button, Modal } from 'UI';
 import Breadcrumb from '../_components/Breadcrumb';
 import SideMenu from '../_components/SideMenu';
 import { userLogout } from 'actions';
@@ -45,10 +45,19 @@ class App extends Component {
         });
     }
     handleLogout() {
-        if (window.confirm('确认要退出吗？')) {
-            this.props.userLogout();
-            this.props.router.push('/login');
-        }
+        // if (window.confirm('确认要退出吗？')) {
+        //     this.props.userLogout();
+        //     this.props.router.push('/login');
+        // }
+        Modal.confirm({
+            title: '确认要退出吗？',
+            content: '点击确认立刻退出',
+            onOk: () => {
+                this.props.userLogout();
+                this.props.router.push('/login');
+            },
+            onCancel: () => {}
+        });
     }
     render() {
         return (
