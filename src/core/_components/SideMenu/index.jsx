@@ -18,8 +18,12 @@ class SideMenu extends Component {
         this.__initRouteEvent();
         this.__initDefaultMenuItem();
     }
+    componentWillUnmount() {
+        const routerCallback = this.state.routerCallback;
+        routerCallback && routerCallback();
+    }
     __initRouteEvent() {
-        this.props.router.listen((obj) => {
+        const routerCallback = this.props.router.listen((obj) => {
             const pathname = obj.pathname;
             const keys = [];
             let key;
@@ -37,6 +41,10 @@ class SideMenu extends Component {
             this.setState({
                 selectedKeys: keys
             });
+        });
+        // console.log(routerCallback);
+        this.setState({
+            routerCallback
         });
     }
     __initDefaultMenuItem() {

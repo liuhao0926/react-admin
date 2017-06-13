@@ -21,10 +21,8 @@ class App extends Component {
             minContentHeight: 280
             // defaultSelectedKeys: []
         };
-        this.handleToggle = this.handleToggle.bind(this);
-        this.handleLogout = this.handleLogout.bind(this);
     }
-    handleToggle() {
+    handleToggle = () => {
         this.setState({
             collapsed: !this.state.collapsed
         });
@@ -38,17 +36,14 @@ class App extends Component {
         window.onresize = this.resizeWindow.bind(this);
     }
     resizeWindow() {
+        // console.log('resizeWindow');
         const clientHeight = document.documentElement.clientHeight;
         const contentHeight = clientHeight - 64 - 42 - 24;
         this.setState({
             minContentHeight: contentHeight
         });
     }
-    handleLogout() {
-        // if (window.confirm('确认要退出吗？')) {
-        //     this.props.userLogout();
-        //     this.props.router.push('/login');
-        // }
+    handleLogout = () => {
         Modal.confirm({
             title: '确认要退出吗？',
             content: '点击确认立刻退出',
@@ -59,6 +54,7 @@ class App extends Component {
             onCancel: () => {}
         });
     }
+    com
     render() {
         return (
             <Layout>
