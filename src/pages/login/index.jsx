@@ -79,9 +79,8 @@ class LoginPage extends Component {
                         <Checkbox>记住账号</Checkbox>
                         <a className="login-form-forgot">忘记密码？</a>
                         <Button type="primary"
-                            htmlType="button"
+                            htmlType="submit"
                             className="login-form-button"
-                            onClick={this.handleSubmit}
                             loading={this.state.spnLoading}
                         >
                             登录

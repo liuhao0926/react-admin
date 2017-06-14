@@ -32,11 +32,13 @@ class App extends Component {
         this.handleWindowResize();
         // console.log('this.props:', this.props.location);
     }
+    componentWillUnmount() {
+        window.onresize = null;
+    }
     handleWindowResize() {
         window.onresize = this.resizeWindow.bind(this);
     }
     resizeWindow() {
-        // console.log('resizeWindow');
         const clientHeight = document.documentElement.clientHeight;
         const contentHeight = clientHeight - 64 - 42 - 24;
         this.setState({
